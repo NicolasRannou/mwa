@@ -1,12 +1,6 @@
 
 (function (exports, $) {
     function showEntries () {
-        if (Modernizr.localstorage) {
-          window.console.log("This browser supports HTML5 localStorage!");
-        } else {
-          window.console.log("no localStorage :(");
-        }
-        
         var data = localStorage.getItem("data");
         if (!data) {
             data = [
