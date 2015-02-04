@@ -1,8 +1,8 @@
-Step 1 - Completed
+### Step 1 - Completed
 
-Step 2 - Completed
+### Step 2 - Completed
 
-Step 3 - Completed
+### Step 3 - Completed
 
 Mobile user experience:
 
@@ -26,7 +26,6 @@ Markup:
 - Functions attached to window
 - Diary stored as plain HTML (rather AS JSON array)
 
-
-Step 4 - Completed
+### Step 4 - Completed
 
 Moving to the next level...
