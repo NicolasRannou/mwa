@@ -21,6 +21,7 @@
 
     function addEntry (subject, body) {
         var data = localStorage.getItem("data");
+        // ecapde data
         if (data) data = JSON.parse(data);
         else data = [];
         body = body.replace(/\n/g, "<br/>");
