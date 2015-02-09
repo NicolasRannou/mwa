@@ -1,0 +1,40 @@
+article {
+  font-size: 1em;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  overflow: hidden;
+
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+article.collapse{
+  margin-bottom: 2px;
+}
+
+article h2 {
+  color: #ffffff;
+  background-color: #00695C;
+  font-size: 1.5em;
+  margin:0;
+  padding: 16px;
+  font-weight: normal;
+}
+
+article h2:hover{
+  cursor: pointer;
+}
+
+article > p {
+  font-size: 1.3em;
+  padding: 10px;
+}
+
+/*more padding on small screens for easier click*/
+@media(max-width: 960px){
+  article h2 {
+    padding: 24x;
+  }
+}
