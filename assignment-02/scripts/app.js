@@ -1,18 +1,33 @@
-$( document ).ready(function() {
-  $( "article" ).each(function( index ) {
-    $( this ).css('height', $( this ).find('h2').outerHeight( true ) + $( this ).find('p').outerHeight( true ) );
-  });
-
-  // hide paragraphs on demand
-  $("article").click(function() {
-    if( $(this).hasClass("collapse") ){
-      // put height to header's height
-      $( this ).css('height', $( this ).find('h2').outerHeight( true ) + $( this ).find('p').outerHeight( true ) );
-      $( this ).removeClass("collapse");
+(function() {
+    "use strict";
+    // update article height
+    function updateHeight(article){
+      if( article.hasClass("closed") ){
+          article.css('height', article.find('h2').outerHeight( true ) );
+      }
+      else{
+          article.css('height', article.find('h2').outerHeight( true ) + article.find('p').outerHeight( true ) );
+      }
     }
-    else{
-      $( this ).css('height', $( this ).find('h2').outerHeight( true ) );
-      $( this ).addClass("collapse");
-    }
-  });
-});
+  
+    // click callback
+    $( document ).ready(function() {        
+        $("article h2").click(function() {
+            var article = $( this ).parent();
+            // trick to have nice animation even if height was not previously defined
+            // we use promise to ensure the height is set before modifying it
+            article.css('height', article.height()).promise().done(function(){
+              article.toggleClass('closed');
+              updateHeight( article );
+            });
+        });
+    });
+  
+    // handle new orientation
+    // resize appears the best solution (well supported)
+    $( window ).on( "resize", function( event ) {
+        $( "article" ).each(function( index ) {
+            updateHeight( $( this ) );
+        });
+    });
+})();

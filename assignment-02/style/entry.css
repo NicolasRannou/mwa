@@ -1,6 +1,5 @@
 article {
   font-size: 1em;
-  background-color: #f9f9f9;
   margin-bottom: 10px;
   overflow: hidden;
 
@@ -10,7 +9,7 @@ article {
   transition: all 0.3s;
 }
 
-article.collapse{
+article.closed{
   margin-bottom: 2px;
 }
 
@@ -28,8 +27,10 @@ article h2:hover{
 }
 
 article > p {
+  background-color: #f9f9f9;
   font-size: 1.3em;
   padding: 10px;
+  margin: 0px;
 }
 
 /*more padding on small screens for easier click*/
