@@ -1,5 +1,3 @@
-// add google analytics
-
 //Modernizr : css transition
 
 //
@@ -133,8 +131,7 @@
                 });
           
                 article.find('.geo').html('Remove location');
-              window.console.log(article.find('.geo'));
-          
+
                 // reactivate buttons!
                 actions.each(function( ) {
                     if(!$(this).hasClass('wait')){
@@ -199,7 +196,7 @@
         /**
          * Callback when users clicks "delete entry"
          */
-        function deleteEntry(){
+        function deleteEntry(event){
             event.stopPropagation();
             // get target form
             var form = $( this ).closest("form");
@@ -324,12 +321,19 @@
         
             article.toggleClass("editing");
         
-            // if we are in a regular entry
+            // if we are in first entry
             if(article.hasClass("add")){
               form.find(".location").html("-");
               form.find(".time").html("-");
               // reset location
               article.find('.geo').data('geolocation',  entryTemplate.location);
+            }
+            else{
+              var originalLocation = article.find('.geo').data('geolocationOriginal');
+              article.find('.geo').data('geolocation', originalLocation);
+              article.find('.location').each(function( index ) {
+                    $(this).html(originalLocation.city);
+                });
             }
         
             updateHeight( article );
@@ -399,10 +403,12 @@
         /**
          * Callback when users clicks "update entry"
          */
-        function updateEntry(){
+        function updateEntry(event){
             event.stopPropagation();
             // get target form
             var form = $( this );
+            // delete previous entry from db.
+            var id  = form.attr('id');
         
             // update value in database
             var entry = $.extend(true, {}, entryTemplate);
@@ -416,11 +422,12 @@
         
             // update location if on
             var location = form.find('.geo').data("geolocation");
+            form.find('.geo').data("geolocationOriginal", location);
             entry.location.city = location.city;
             entry.location.latitude = location.latitude;
             entry.location.longitude = location.longitude;
         
-            entry.key = entry.time.nerd;
+            entry.key = id;
         
             // save in DB
             saveEntryInStore(entry);
@@ -573,7 +580,7 @@
                             $('<div />', { class: 'dynamic'}).append(
                                 $('<input />', { class: 'action save', type:'submit', value: 'Save'}),
                                 $('<input />', { class: 'action cancel', type:'button', value: 'Cancel'}),
-                                $('<div />', { class: 'action geo', text: 'Update Location'}).data('geolocation', entry.location),
+                                $('<div />', { class: 'action geo', text: 'Update Location'}).data('geolocation', entry.location).data('geolocationOriginal', entry.location),
                                 $('<div />', { class: 'action wait', text: 'Updating Location...'}),
                                 $('<div />', { class: 'clear'})
                             ),
@@ -600,7 +607,6 @@
          * Turn geolocation ON if user allowed it!
          */
         function showPosition(position) {
-            window.console.log(position);
             // init geocoding API
             geocoder = new google.maps.Geocoder();
             geolocationActive = true;
@@ -611,8 +617,6 @@
          * Turn geolocation OFF if user denied it!
          */
         function errorFunction(error) {
-            window.console.log('geolocation error');
-            window.console.log(error);
             geolocationActive = false;
         }
 
@@ -621,9 +625,7 @@
          * Returns true since the app works without it.
          */
         function configureLocation() {
-            if (navigator.geolocation) {
-                window.console.log('test geolocation... yaya!');
-                navigator.geolocation.getCurrentPosition(showPosition, errorFunction );
+            if (navigator.geolocation) { navigator.geolocation.getCurrentPosition(showPosition, errorFunction );
             } else {
                 window.console.log("Geolocation is not supported by this browser.");
                 // it is ok, not FATAL error
@@ -640,7 +642,7 @@
             if (!window.localStorage) {
               // hide all
                 // Show error div
-                window.console.log("JSON is not supported by this browser.");
+                window.console.log("localStorage is not supported by this browser.");
                 return false;
             }      
 

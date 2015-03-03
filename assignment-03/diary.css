@@ -102,6 +102,7 @@ textarea,input {
   resize: none;
   outline: 0;
   font-size: 1em;
+  margin: 0;
 }
 
 textarea {
@@ -114,6 +115,14 @@ textarea {
 input[type="text"]{
   color: #ffffff;
   width: calc(100% - 32px);
+}
+
+textarea:required {
+    box-shadow:none;
+}
+
+textarea:invalid {
+    box-shadow:none;
 }
 
 .geo{
