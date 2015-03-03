@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
       "projectGuid": "14c321c6-b810-4a5d-b332-1f004dd8d8bc",
-      "lastModifiedDate": 1425382646108,
+      "lastModifiedDate": 1425391100257,
       "creationDate": 1425307024987
     },
     "sourceDirectory": "",
@@ -106,8 +106,8 @@
         "excludedLibraries_": "",
         "iosProvs_": [],
         "cordovaCLIVersion_": "3.5",
-        "appVersion_": "0.0.1",
-        "appVersionCode_": "1",
+        "appVersion_": "0.0.3",
+        "appVersionCode_": "3",
         "crosswalkVersion_": "stable",
         "appAuthor_": "Nicolas Rannou",
         "appDescription_": "Remeber what is in your mind!"
