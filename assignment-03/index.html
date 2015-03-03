@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+  <head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <meta name='viewport' content='width=device-width'/>
+    <title>My Diary</title>
+    <link rel='stylesheet' href='diary.css' type='text/css' media='screen' charset='utf-8'/>
+      
+    <script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
+    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+      
+    <!--    modernizer-->
+    <script src='libs/modernizr.3.json.localstorage.geolocation.csstransition.js'></script>
+    <script type="text/javascript">
+      Modernizr.load([
+        // handle localstorage support
+        {
+          test: Modernizr.localstorage,
+          nope: 'libs/localStorage.fallback.js'
+        },
+        // handle json support
+        {
+          test: Modernizr.json,
+          nope: 'libs/json2.js'
+
+        },
+        // handle geolocation support
+        {
+          test: Modernizr.geolocation,
+          nope: 'libs/geolocation.fallback.js'
+
+        },
+        'diary.js'
+      ]);
+    </script>
+  </head>
+  <body>
+      <h1>My Diary Entries</h1>
+    <section class="new">
+      <form action='javascript:void(0);'>
+        <article class="add">
+          <div class="header">
+            <div class="dynamic">
+              <input class="title" type="text" name="title" placeholder="Title" required/>
+            </div>
+          </div>
+          <div class="content">
+            <div class="dynamic">
+              <textarea class="entry" type="text" name="content" placeholder="What's in my mind?" required/></textarea>
+              <div class="more">
+                From <div class="location"> - </div>, <div class="time"> - </div>
+              </div>
+            </div>
+                        <div class="actions" >
+                          <div class="dynamic">
+                <input class="action create" type="submit" value="Create"/>
+<!--              maybe cancel should be "discard" instead so we have a scpecific easier to read callback -->
+                <input class="action cancel" type="button" value="Cancel" />
+                            <div class="action geo" />Update Location</div>
+                          <div class="action wait" />Updating Location...</div>
+                <div class="clear"></div>
+                          </div>
+              </div>
+          </div>
+        </article>
+      </form>
+    </section>
+
+    <section class="saved"></section>
+
+<section class="error">
+      <form action='javascript:void(0);'>
+        <article>
+          <div class="header">
+            <div class="dynamic">
+              <div class="title"> Oh no...!</div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="dynamic">
+              <div class="entry"> Your browser must support LocalStorage and JSON to run the app.</div>
+              <div class="more">
+                From <div class="location"> Nicolas Rannou </div>
+              </div>
+            </div>
+                        <div class="actions" >
+                          <div class="dynamic">
+                            <div class="action" />Bye</div>
+                <div class="clear"></div>
+                          </div>
+              </div>
+          </div>
+        </article>
+      </form>
+    </section>
+</body>
+
+</html>
+
